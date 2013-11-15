@@ -1,0 +1,230 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Primal.js by otm</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Primal.js</h1>
+        <p>A tiny, yet flexibel, event library.</p>
+
+        <p class="view"><a href="https://github.com/otm/primal.js">View the Project on GitHub <small>otm/primal.js</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/otm/primal.js/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/otm/primal.js/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/otm/primal.js">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="primaljs" class="anchor" href="#primaljs"><span class="octicon octicon-link"></span></a>primal.js</h1>
+
+<p><strong>primal</strong> <em>/ˈprʌɪm(ə)l/</em><br>
+       most important; primary or fundamental.</p>
+
+<p>primal.js is a small utility library heavily inspired by riot.js and Mootools. Why primal.js when there is riot.js? The short explanation is that I prefer having the choice of extending the prototype. In addition, primal.js does not have any dependencies, and will never have, on external libraries for instance jQuery.</p>
+
+<p>There are two ways to use primal, first by extending the prototype:</p>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">Car</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">primal</span><span class="p">.</span><span class="nx">observable</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">Car</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+
+<p>Or by extending on instance of an object:</p>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">car</span> <span class="o">=</span> <span class="nx">primal</span><span class="p">.</span><span class="nx">observable</span><span class="p">({});</span>
+</pre></div>
+
+<h2>
+<a name="primalobservableinstance-class" class="anchor" href="#primalobservableinstance-class"><span class="octicon octicon-link"></span></a>primal.observable(instance, class*)</h2>
+
+<p>Handle events on native javascript object by extending them with primal.observable</p>
+
+<ul>
+<li>
+<strong>instance</strong> <em>(object)</em>- The object to extend</li>
+<li>
+<strong>class*</strong> <em>(constructor)</em> - Function to extend prototype on<br>
+*<em>optional</em>
+</li>
+</ul><p><strong>Example:</strong></p>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">car</span> <span class="o">=</span> <span class="nx">primal</span><span class="p">.</span><span class="nx">observable</span><span class="p">({});</span>
+</pre></div>
+
+<h4>
+<a name="addeventevent-fn" class="anchor" href="#addeventevent-fn"><span class="octicon octicon-link"></span></a>addEvent(event, fn)</h4>
+
+<p>Add an event listener to an object.</p>
+
+<ul>
+<li>
+<strong>event</strong> <em>(string)</em> - The event to listen to</li>
+<li>
+<strong>fn</strong> <em>(function)</em> - The function to call when the event is triggered</li>
+</ul><p><strong>Example:</strong></p>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">car</span><span class="p">.</span><span class="nx">addEvent</span><span class="p">(</span><span class="s1">'running'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){...});</span>
+</pre></div>
+
+<h4>
+<a name="addeventsoptions" class="anchor" href="#addeventsoptions"><span class="octicon octicon-link"></span></a>addEvents(options)</h4>
+
+<p>Add several events listeners to an object.</p>
+
+<ul>
+<li>
+<strong>options</strong> <em>(object)</em> - Object defining the events to listen to</li>
+</ul><p><strong>Example:</strong></p>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">car</span><span class="p">.</span><span class="nx">addEvents</span><span class="p">({</span>
+    <span class="nx">running</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){...},</span>
+    <span class="nx">stoped</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){...}</span>
+<span class="p">});</span>
+</pre></div>
+
+<h4>
+<a name="fireeventevent-argarg-delay" class="anchor" href="#fireeventevent-argarg-delay"><span class="octicon octicon-link"></span></a>fireEvent(event, arg|[arg], delay)</h4>
+
+<p>Fire an event. Events can be triggered both from the object or from the outside.</p>
+
+<ul>
+<li>
+<strong>event</strong> <em>(string)</em> - The event to trigger</li>
+<li>
+<strong>arg|[arg]</strong> <em>(mixed|array)</em> - An argument or an array of arguments</li>
+<li>
+<strong>delay</strong> <em>(integer)</em> - The delay before triggering the event</li>
+</ul><p><strong>Example:</strong></p>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">Car</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">start</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">isStarted</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">fireEvent</span><span class="p">(</span><span class="s1">'running'</span><span class="p">,</span> <span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">timesStarted</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">driver</span><span class="p">]);</span>
+<span class="p">};</span>
+</pre></div>
+
+<h4>
+<a name="removeeventevent-function" class="anchor" href="#removeeventevent-function"><span class="octicon octicon-link"></span></a>removeEvent(event, function)</h4>
+
+<p>Remove an event listener from an object.</p>
+
+<ul>
+<li>
+<strong>event</strong> <em>(string)</em> - The event to remove from</li>
+<li>
+<strong>fn</strong> <em>(function)</em> - The function to remove </li>
+</ul><p><strong>Example:</strong></p>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">eventListner</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">timeStarted</span><span class="p">,</span> <span class="nx">driver</span><span class="p">){...};</span>
+
+<span class="nx">car</span><span class="p">.</span><span class="nx">addEvent</span><span class="p">(</span><span class="s1">'running'</span><span class="p">,</span> <span class="nx">eventListner</span><span class="p">);</span>
+<span class="p">...</span>
+<span class="nx">car</span><span class="p">.</span><span class="nx">removeEvent</span><span class="p">(</span><span class="s1">'running'</span><span class="p">,</span> <span class="nx">eventListner</span><span class="p">);</span>
+</pre></div>
+
+<h4>
+<a name="removeeventsevent" class="anchor" href="#removeeventsevent"><span class="octicon octicon-link"></span></a>removeEvents(event)</h4>
+
+<p>Remove all events of the specified type</p>
+
+<ul>
+<li>
+<strong>event</strong> <em>(string)</em> - The event to remove</li>
+</ul><p><strong>Example:</strong></p>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">car</span><span class="p">.</span><span class="nx">removeEvent</span><span class="p">(</span><span class="s1">'running'</span><span class="p">);</span>
+</pre></div>
+
+<h2>
+<a name="primalmediatorinstance-class" class="anchor" href="#primalmediatorinstance-class"><span class="octicon octicon-link"></span></a>primal.mediator(instance, class*)</h2>
+
+<p>Subscribe and publish messages.</p>
+
+<ul>
+<li>
+<strong>instance</strong> (object) - The object to extend</li>
+<li>
+<strong>class*</strong> <em>(optional)</em> - Function to extend prototype on</li>
+</ul><p><strong>Example:</strong></p>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">mediator</span> <span class="o">=</span> <span class="nx">primal</span><span class="p">.</span><span class="nx">mediator</span><span class="p">({});</span>
+</pre></div>
+
+<h4>
+<a name="subscribetopic-fn" class="anchor" href="#subscribetopic-fn"><span class="octicon octicon-link"></span></a>subscribe(topic, fn)</h4>
+
+<p>Subscribe to topic on the event mediator.</p>
+
+<ul>
+<li>
+<strong>topic</strong> <em>(string)</em> - The event to remove from</li>
+<li>
+<strong>fn</strong> <em>(function)</em> - The function to remove </li>
+</ul><p><strong>Example:</strong></p>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">eventListner</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){...};</span>
+<span class="nx">car</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s1">'keyTurned'</span><span class="p">,</span> <span class="nx">eventListner</span><span class="p">);</span>
+</pre></div>
+
+<h4>
+<a name="publishtopic-arg-delay" class="anchor" href="#publishtopic-arg-delay"><span class="octicon octicon-link"></span></a>publish(topic, arg, delay)</h4>
+
+<p>Publish an message to the event mediator.</p>
+
+<ul>
+<li>
+<strong>topic</strong> <em>(string)</em> - The topic to publish</li>
+<li>
+<strong>arg|[arg]</strong> <em>(mixed|array)</em> - An argument or an array of arguments</li>
+<li>
+<strong>delay</strong> <em>(integer)</em> - The delay before triggering the event</li>
+</ul><p><strong>Example:</strong></p>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">car</span><span class="p">.</span><span class="nx">publish</span><span class="p">(</span><span class="s1">'keyTurned'</span><span class="p">,</span> <span class="p">[]);</span>
+</pre></div>
+
+<h4>
+<a name="unsubscribetopic-fn" class="anchor" href="#unsubscribetopic-fn"><span class="octicon octicon-link"></span></a>unsubscribe(topic, fn)</h4>
+
+<p>Unsubscibe, stop listening, to a topic on the event mediator.</p>
+
+<ul>
+<li>
+<strong>topic</strong> <em>(string)</em> - The event to remove from</li>
+<li>
+<strong>fn</strong> <em>(function)</em> - The function to remove </li>
+</ul><p><strong>Example:</strong></p>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">eventListner</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){...};</span>
+<span class="nx">car</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s1">'keyTurned'</span><span class="p">,</span> <span class="nx">eventListner</span><span class="p">);</span>
+<span class="p">...</span>
+<span class="nx">car</span><span class="p">.</span><span class="nx">unsubscribe</span><span class="p">(</span><span class="s1">'keyTurned'</span><span class="p">,</span> <span class="nx">eventListner</span><span class="p">);</span>
+</pre></div>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>primal.js is licensed under the MIT license</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/otm">otm</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
