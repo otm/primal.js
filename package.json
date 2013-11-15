@@ -1,0 +1,20 @@
+{
+  "name": "primal.js",
+  "author": "Nils Lagerkvist",
+  "license": "MIT",
+  "copyright": "2013 Nils Lagerkvist",
+  "version": "0.0.1",
+  "repositories": [
+       {
+           "type": "git",
+           "url": "http://otm.gihub.com/primal.js" 
+       } 
+  ],
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-watch": "~0.4.4"
+  }
+}
