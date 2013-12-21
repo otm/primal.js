@@ -11,7 +11,7 @@ var Car = function(){
     primal.observable(this, Car);
 };
 ```
-Or by extending on instance of an object:
+Or by extending an instance of an object:
 ```javascript
 var car = primal.observable({});
 ```
